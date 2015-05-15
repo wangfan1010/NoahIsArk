@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+	xsi:schemaLocation="   
+        http://www.springframework.org/schema/beans    
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+        http://cxf.apache.org/jaxws    
+        http://cxf.apache.org/schemas/jaxws.xsd
+        http://cxf.apache.org/transports/http/configuration
+        http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+
+	<!-- <http:conduit>标签是对cxf的客户端，即<jaxws:client>产生影响，对<jaxws:endpoint>没有影响 -->
+	<!-- <http:conduit name="*.http-conduit">会对所有的cxf客户端都生效，可以通过name属性，来指定生效范围 -->
+	<http-conf:conduit name="*/.*">
+		<http-conf:client AllowChunking="false" />
+	</http-conf:conduit>
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<!-- 对接web service配置 -->
+	<import resource="classpath:spring-cxf-server.xml" />
+	<import resource="classpath:spring-cxf-client.xml" />
+</beans>
